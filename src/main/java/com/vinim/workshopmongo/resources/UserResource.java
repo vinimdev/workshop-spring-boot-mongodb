@@ -1,5 +1,6 @@
 package com.vinim.workshopmongo.resources;
 
+import com.vinim.workshopmongo.domain.Post;
 import com.vinim.workshopmongo.domain.User;
 import com.vinim.workshopmongo.dto.UserDTO;
 import com.vinim.workshopmongo.services.UserService;
@@ -36,6 +37,14 @@ public class UserResource {
         User obj = service.findById(id);
 
         return ResponseEntity.ok().body(new UserDTO(obj));
+    }
+
+    @RequestMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+
+        User obj = service.findById(id);
+
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
     @PostMapping
